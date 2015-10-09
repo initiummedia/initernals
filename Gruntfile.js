@@ -25,6 +25,8 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
 
+  grunt.loadNpmTasks('grunt-rsync');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -114,6 +116,22 @@ module.exports = function (grunt) {
         options: {
           open: true,
           base: '<%= yeoman.dist %>'
+        }
+      }
+    },
+
+    rsync: {
+      options: {
+        args: ["--verbose"],
+        exclude: [".git*","*.scss","node_modules"],
+        recursive: true
+      },
+      showcase: {
+        options: {
+          src: "./dist/",
+          dest: "/home/vagrant/web/initernals",
+          host: "showcase",
+          delete: true // Careful this option could cause data loss, read the docs!
         }
       }
     },
@@ -461,6 +479,8 @@ module.exports = function (grunt) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve:' + target]);
   });
+
+  grunt.registerTask('deploy', ['rsync']);
 
   grunt.registerTask('test', [
     'clean:server',

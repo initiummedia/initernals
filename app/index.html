@@ -88,8 +88,14 @@
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/about.js"></script>
     <script src="scripts/services/memory.js"></script>
-    <script src="scripts/xdomain.min.js" slave="http://s.init.im:8081/proxy.html"></script>
-
+    <script src="scripts/xdomain.min.js"></script>
     <!-- endbuild -->
+
+    <script>
+      xdomain.slaves({
+        'http://s.init.im:8081': '/proxy.html'
+      })
+    </script>
+
 </body>
 </html>

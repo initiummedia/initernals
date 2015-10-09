@@ -16,7 +16,9 @@ angular.module('initernalsApp')
     var memory = {
       requestUUID: function(callback){
         $http.get(urlUUID).then(function(response){
-          $localStorage.uuid = response.data.data.uuid
+          if (!$localStorage.uuid) {
+            $localStorage.uuid = response.data.data.uuid
+          }
           callback(response)
         }, function(response){
           console.log('Error:')

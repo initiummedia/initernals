@@ -8,16 +8,21 @@
  * Controller of the initernalsApp
  */
 angular.module('initernalsApp')
-  .controller('MainCtrl', function ($scope, $sce) {
+  .controller('MainCtrl', function ($scope, $sce, Memory) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
-  $scope.changePrefix = function(){
-  	  var url = "https://www.google.com/calendar/embed?src=" + this.prefix + "%40theinitium.com&ctz=Asia/Hong_Kong"
-  	  $scope.url = $sce.trustAsResourceUrl(url)
-  }
+    Memory.sendMessage('render', 'main', 'raw', function(response){
+      console.log(response)
+    })
+
+    $scope.changePrefix = function(){
+      var url = "https://www.google.com/calendar/embed?src=" + this.prefix + "%40theinitium.com&ctz=Asia/Hong_Kong"
+      Memory.sendMessage('prefix', this.prefix)
+      $scope.url = $sce.trustAsResourceUrl(url)
+    }
 
   });

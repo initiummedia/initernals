@@ -11,6 +11,7 @@
 angular
   .module('initernalsApp', [
     'ngAnimate',
+    'ngStorage',
     'ngCookies',
     'ngResource',
     'ngRoute',
